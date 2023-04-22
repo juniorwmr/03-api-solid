@@ -14,6 +14,7 @@ const envSchema = z.object({
     })
     .int()
     .default(3333),
+  DATABASE_URL: z.string().url(),
 })
 
 const _env = envSchema.safeParse(process.env)
