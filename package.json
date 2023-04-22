@@ -1,0 +1,23 @@
+{
+  "name": "03-api-solid",
+  "version": "1.0.0",
+  "description": "gymPass style app.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build"
+  },
+  "keywords": ["gymPass", "solid", "api"],
+  "author": "Washington Muniz",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "18.15.13",
+    "tsup": "6.7.0",
+    "tsx": "3.12.6",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "fastify": "4.15.0"
+  }
+}
