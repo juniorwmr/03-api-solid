@@ -4,11 +4,16 @@ import { z } from 'zod'
 config()
 
 const envSchema = z.object({
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  NODE_ENV: z
+    .enum(['development', 'production', 'test'])
+    .default('development'),
   HOST: z.string().default('0.0.0.0'),
-  PORT: z.number({
-    coerce: true
-  }).int().default(3333)
+  PORT: z
+    .number({
+      coerce: true,
+    })
+    .int()
+    .default(3333),
 })
 
 const _env = envSchema.safeParse(process.env)
