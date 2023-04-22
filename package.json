@@ -8,7 +8,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build"
   },
-  "keywords": ["gymPass", "solid", "api"],
+  "keywords": [
+    "gymPass",
+    "solid",
+    "api"
+  ],
   "author": "Washington Muniz",
   "license": "MIT",
   "devDependencies": {
@@ -18,6 +22,8 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "fastify": "4.15.0"
+    "dotenv": "16.0.3",
+    "fastify": "4.15.0",
+    "zod": "3.21.4"
   }
 }
