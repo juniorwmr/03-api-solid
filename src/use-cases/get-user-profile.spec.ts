@@ -2,7 +2,7 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 
 import { InMemoryUsersRepository } from '@/repositories/in-memory'
-import { ResourceNotFoundError } from './errors/resource-not-found'
+import { ResourceNotFoundError } from './errors'
 import { GetUserProfileUseCase } from './get-user-profile'
 
 describe('GetUserProfileUseCase', () => {
@@ -33,11 +33,10 @@ describe('GetUserProfileUseCase', () => {
   })
 
   it('should not be able to get a user profile with wrong id', async () => {
-    await expect(
-      async () =>
-        await sut.execute({
-          userId: 'wrong-user-id',
-        }),
+    await expect(async () =>
+      sut.execute({
+        userId: 'wrong-user-id',
+      }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

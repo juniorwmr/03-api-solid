@@ -3,7 +3,7 @@ import { compare } from 'bcryptjs'
 
 import { RegisterUseCase } from './register'
 import { InMemoryUsersRepository } from '@/repositories/in-memory'
-import { UserAlreadyExistsError } from './errors/user-already-exists-error'
+import { UserAlreadyExistsError } from './errors'
 
 describe('RegisterUseCase', () => {
   let sut: RegisterUseCase
@@ -37,13 +37,12 @@ describe('RegisterUseCase', () => {
       password: '123456',
     })
 
-    await expect(
-      async () =>
-        await sut.execute({
-          name: 'John Doe',
-          email,
-          password: '123456',
-        }),
+    await expect(async () =>
+      sut.execute({
+        name: 'John Doe',
+        email,
+        password: '123456',
+      }),
     ).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 })

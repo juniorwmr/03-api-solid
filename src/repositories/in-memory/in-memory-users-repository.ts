@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto'
+
 import {
   User,
   UserCreateInput,
@@ -9,8 +11,8 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   async create(data: UserCreateInput): Promise<User> {
     const user: User = {
-      id: String(this.users.length + 1),
       ...data,
+      id: randomUUID(),
       created_at: new Date(),
     }
     this.users.push(user)
