@@ -1,9 +1,9 @@
 import { prisma } from '@/lib/prisma'
-import { UserCreateInput, UsersRepository } from './users-repository'
+import { User, UserCreateInput, UsersRepository } from '@/repositories'
 
 export class PrismaUsersRepository implements UsersRepository {
-  async create(data: UserCreateInput): Promise<void> {
-    await prisma.user.create({ data })
+  async create(data: UserCreateInput): Promise<User> {
+    return prisma.user.create({ data })
   }
 
   async findByEmail(email: string) {

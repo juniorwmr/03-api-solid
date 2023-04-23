@@ -13,6 +13,6 @@ export type UserCreateInput = {
 }
 
 export interface UsersRepository {
-  create(data: UserCreateInput): Promise<void>
+  create(data: UserCreateInput): Promise<User>
   findByEmail(email: string): Promise<User | null>
 }

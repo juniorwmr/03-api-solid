@@ -1,15 +1,21 @@
-import { User, UserCreateInput, UsersRepository } from './users-repository'
+import {
+  User,
+  UserCreateInput,
+  UsersRepository,
+} from '@/repositories/users-repository'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public users = [] as User[]
 
-  async create(data: UserCreateInput): Promise<void> {
+  async create(data: UserCreateInput): Promise<User> {
     const user: User = {
       id: String(this.users.length + 1),
       ...data,
       created_at: new Date(),
     }
     this.users.push(user)
+
+    return user
   }
 
   async findByEmail(email: string): Promise<User | null> {
