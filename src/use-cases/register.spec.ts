@@ -5,14 +5,14 @@ import { RegisterUseCase } from './register'
 import { InMemoryUsersRepository } from '@/repositories/in-memory'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
-let sut: RegisterUseCase
-
-beforeEach(() => {
-  const usersRepository = new InMemoryUsersRepository()
-  sut = new RegisterUseCase(usersRepository)
-})
-
 describe('RegisterUseCase', () => {
+  let sut: RegisterUseCase
+
+  beforeEach(() => {
+    const usersRepository = new InMemoryUsersRepository()
+    sut = new RegisterUseCase(usersRepository)
+  })
+
   it('should hash user password upon registration', async () => {
     const { user } = await sut.execute({
       name: 'John Doe',
