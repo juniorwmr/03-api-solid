@@ -19,5 +19,6 @@ export interface CheckInsRepository {
     page: number,
     perPage: number,
   ): Promise<CheckIn[]>
+  countByUserId(userId: string): Promise<number>
   findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null>
 }

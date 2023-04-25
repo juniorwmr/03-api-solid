@@ -7,7 +7,10 @@ type FetchMemberCheckInsHistoryUseCaseRequest = {
 }
 
 type FetchMemberCheckInsHistoryUseCaseResponse = {
-  checkIns: CheckIn[]
+  checkIns: {
+    data: CheckIn[]
+    total: number
+  }
 }
 
 export class FetchMemberCheckInsHistoryUseCase {
@@ -18,14 +21,16 @@ export class FetchMemberCheckInsHistoryUseCase {
     page,
     perPage,
   }: FetchMemberCheckInsHistoryUseCaseRequest): Promise<FetchMemberCheckInsHistoryUseCaseResponse> {
-    const checkIns = await this.checkInsRepository.findManyByUserId(
-      userId,
-      page,
-      perPage,
-    )
+    const [checkIns, total] = await Promise.all([
+      this.checkInsRepository.findManyByUserId(userId, page, perPage),
+      this.checkInsRepository.countByUserId(userId),
+    ])
 
     return {
-      checkIns,
+      checkIns: {
+        data: checkIns,
+        total,
+      },
     }
   }
 }

@@ -25,13 +25,16 @@ describe('FetchMemberCheckInsHistoryUseCase', () => {
       userId,
     })
 
-    const { checkIns } = await sut.execute({
+    const {
+      checkIns: { data: checkIns, total },
+    } = await sut.execute({
       userId,
       page: 1,
       perPage: 20,
     })
 
     expect(checkIns).toHaveLength(2)
+    expect(total).toBe(2)
     expect(checkIns).toEqual([
       expect.objectContaining({ gym_id: firstCheckIn.gym_id }),
       expect.objectContaining({ gym_id: secondCheckIn.gym_id }),
@@ -48,20 +51,26 @@ describe('FetchMemberCheckInsHistoryUseCase', () => {
       })
     }
 
-    const { checkIns: checkInsFirstPage } = await sut.execute({
+    const {
+      checkIns: { data: checkInsFirstPage, total: totalFirstPage },
+    } = await sut.execute({
       userId,
       page: 1,
       perPage: 20,
     })
 
     expect(checkInsFirstPage).toHaveLength(20)
+    expect(totalFirstPage).toBe(22)
 
-    const { checkIns: checkInsSecondPage } = await sut.execute({
+    const {
+      checkIns: { data: checkInsSecondPage, total: totalSecondPage },
+    } = await sut.execute({
       userId,
       page: 2,
       perPage: 20,
     })
 
     expect(checkInsSecondPage).toHaveLength(2)
+    expect(totalSecondPage).toBe(22)
   })
 })
