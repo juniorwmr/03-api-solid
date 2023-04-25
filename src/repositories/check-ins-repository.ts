@@ -14,5 +14,10 @@ export type CheckInCreateInput = {
 
 export interface CheckInsRepository {
   create(data: CheckInCreateInput): Promise<CheckIn>
+  findManyByUserId(
+    userId: string,
+    page: number,
+    perPage: number,
+  ): Promise<CheckIn[]>
   findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null>
 }
