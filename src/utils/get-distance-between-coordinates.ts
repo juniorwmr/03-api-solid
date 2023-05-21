@@ -10,10 +10,9 @@ export type DistanceBetweenCoordinatesProps = {
 export function getDistanceBetweenCoordinates({
   from,
   to,
-}: DistanceBetweenCoordinatesProps): Promise<number> {
-  return new Promise((resolve) => {
+}: DistanceBetweenCoordinatesProps): number {
     if (from.latitude === to.latitude && from.longitude === to.longitude) {
-      resolve(0)
+      return 0
     }
 
     const fromRadian = (Math.PI * from.latitude) / 180
@@ -35,6 +34,5 @@ export function getDistanceBetweenCoordinates({
     dist = dist * 60 * 1.1515
     dist = dist * 1.609344
 
-    resolve(dist)
-  })
+  return dist
 }

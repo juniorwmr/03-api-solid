@@ -42,7 +42,7 @@ export class CheckInUseCase {
     }
 
     // calculate distance between gym and user
-    const distance = await getDistanceBetweenCoordinates({
+    const distance = getDistanceBetweenCoordinates({
       from: {
         latitude: userLatitude,
         longitude: userLongitude,

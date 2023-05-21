@@ -9,4 +9,5 @@ export class PrismaGymsRepository implements GymsRepository {
       },
     })) as Gym | null
   }
+  
 }

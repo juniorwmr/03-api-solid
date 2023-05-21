@@ -1,4 +1,5 @@
 import { CreateGymUseCaseRequest, Gym, GymsRepository } from '@/repositories'
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 import { randomUUID } from 'crypto'
 
 export class InMemoryGymsRepository implements GymsRepository {
@@ -26,5 +27,19 @@ export class InMemoryGymsRepository implements GymsRepository {
     const checkIn = this.gyms.find((gym) => gym.id === id)
 
     return checkIn || null
+  }
+
+  async findManyNearBy(params: { latitude: number; longitude: number }): Promise<Gym[]> { 
+    return this.gyms.filter(item => {
+      const distance = getDistanceBetweenCoordinates({
+        from: { latitude: params.latitude, longitude: params.longitude },
+        to: { latitude: item.latitude, longitude: item.longitude }
+      })
+      return distance < 20
+    })
+  }
+
+  async searchMany(query: string, page: number): Promise<Gym[]> { 
+    return this.gyms.filter((gym) => gym.name.includes(query)).slice((page - 1) * 20, page * 20)
   }
 }
